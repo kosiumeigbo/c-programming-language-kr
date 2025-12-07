@@ -2,8 +2,7 @@
 
 main() {
   int c;
+  c = (getchar() != EOF);
 
-  while ((c = getchar()) != EOF) {
-    putchar(c);
-  }
+  printf("%d\n", c);
 }
