@@ -5,16 +5,20 @@
 
 main() {
   int c;
-  int state = NON_BLANK_CHAR;
 
   while ((c = getchar()) != EOF) {
-    if (c == ' ') {
-      if (state == NON_BLANK_CHAR) {
-        state = BLANK_CHAR;
-        putchar(c);
-      }
+    if (c == '\t') {
+      putchar('\\');
+      putchar('t');
+    }
+    if (c == '\b') {
+      putchar('\\');
+      putchar('b');
+    }
+    if (c == '\\') {
+      putchar('\\');
+      putchar('\\');
     } else {
-      state = NON_BLANK_CHAR;
       putchar(c);
     }
   }
