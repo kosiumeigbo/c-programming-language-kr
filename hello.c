@@ -1,25 +1,19 @@
 #include <stdio.h>
 
-#define BLANK_CHAR 1
-#define NON_BLANK_CHAR 0
+#define IS_NON_WORD 1
+#define IS_WORD 0
 
 main() {
   int c;
+  int wordState = IS_NON_WORD;
 
   while ((c = getchar()) != EOF) {
-    if (c == '\t') {
-      putchar('\\');
-      putchar('t');
-    }
-    if (c == '\b') {
-      putchar('\\');
-      putchar('b');
-    }
-    if (c == '\\') {
-      putchar('\\');
-      putchar('\\');
-    } else {
+    if (c != ' ') {
       putchar(c);
+      wordState = IS_WORD;
+    } else if (wordState == IS_WORD) {
+      wordState = IS_NON_WORD;
+      putchar('\n');
     }
   }
 }
