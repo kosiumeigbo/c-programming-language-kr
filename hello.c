@@ -1,23 +1,21 @@
 #include <stdio.h>
 
+#define BLANK_CHAR 1
+#define NON_BLANK_CHAR 0
+
 main() {
-  int nb = 0;
-  int nt = 0;
-  int nl = 0;
   int c;
+  int state = NON_BLANK_CHAR;
 
   while ((c = getchar()) != EOF) {
     if (c == ' ') {
-      ++nb;
-    }
-    if (c == '\t') {
-      ++nt;
-    }
-    if (c == '\n') {
-      ++nl;
+      if (state == NON_BLANK_CHAR) {
+        state = BLANK_CHAR;
+        putchar(c);
+      }
+    } else {
+      state = NON_BLANK_CHAR;
+      putchar(c);
     }
   }
-  printf("Number of blanks is: %d\n", nb);
-  printf("Number of tabs is: %d\n", nt);
-  printf("Number of lines is: %d\n", nl);
 }
