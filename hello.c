@@ -1,45 +1,20 @@
 #include <stdio.h>
 
-// #define IS_NON_WORD 1
-// #define IS_WORD 0
+int power(int m, int n);
 
-main() {
-  int c, i, j;
-  int arraylength = 12;
-  int index_white = arraylength - 2;
-  int index_other = arraylength - 1;
-  int ndigit[arraylength];
+/* test power function */
+int main() {
+  int i;
+  for (i = 0; i < 10; ++i)
+    printf("%d %d %d\n", i, power(2, i), power(-3, i));
+  return 0;
+}
 
-  for (i = 0; i < arraylength; ++i) {
-    ndigit[i] = 0;
-  }
-
-  while ((c = getchar()) != EOF) {
-    if (c >= '0' && c <= '9') {
-      ++ndigit[c - '0'];
-    } else if (c == ' ' || c == '\n' || c == '\t') {
-      ++ndigit[index_white];
-    } else {
-      ++ndigit[index_other];
-    }
-  }
-
-  for (i = 0; i < arraylength; ++i) {
-    if (ndigit[i] == 0) {
-      printf("No input for this character\n");
-    } else {
-      if (i == index_white) {
-        printf("White space:\t");
-      } else if (i == index_other) {
-        printf("Other char:\t");
-      } else {
-        printf("%d:\t", i);
-      }
-
-      for (j = 0; j < ndigit[i]; ++j) {
-        printf("|");
-      }
-      printf("\n");
-    }
-  }
+/* power: raise base to n-th power; n >= 0 */
+int power(int base, int n) {
+  int i, p;
+  p = 1;
+  for (i = 1; i <= n; ++i)
+    p = p * base;
+  return p;
 }
