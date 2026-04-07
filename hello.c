@@ -1,20 +1,27 @@
 #include <stdio.h>
+/* print Fahrenheit-Celsius table
+for fahr = 0, 20, ..., 300; floating-point version */
 
-int power(int m, int n);
+float fahr_to_cels(float fahr);
 
-/* test power function */
 int main() {
-  int i;
-  for (i = 0; i < 10; ++i)
-    printf("%d %d %d\n", i, power(2, i), power(-3, i));
+  float fahr, celsius;
+  float lower, upper, step;
+  lower = 0;   /* lower limit of temperatuire scale */
+  upper = 300; /* upper limit */
+  step = 20;   /* step size */
+
+  fahr = lower;
+  while (fahr <= upper) {
+    celsius = fahr_to_cels(fahr);
+    printf("%3.0f %6.1f\n", fahr, celsius);
+    fahr = fahr + step;
+  }
+
   return 0;
 }
 
-/* power: raise base to n-th power; n >= 0 */
-int power(int base, int n) {
-  int i, p;
-  p = 1;
-  for (i = 1; i <= n; ++i)
-    p = p * base;
-  return p;
+float fahr_to_cels(float fahr) {
+  float celsius = (5.0 / 9.0) * (fahr - 32.0);
+  return celsius;
 }
