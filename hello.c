@@ -11,17 +11,26 @@ main() {
   int max;               /* maximum length seen so far */
   char line[MAXLINE];    /* current input line */
   char longest[MAXLINE]; /* longest line saved here */
+  int i;
+
   max = 0;
   while ((len = get_line(line, MAXLINE)) > 0) {
-    if (len > max) {
-      max = len;
-      copy(longest, line);
+    char s;
+    printf("Length of line input: %d\n", len);
+    if (len >= MAXLINE) {
+      printf("The line input is longer than the line array:\n");
+      for (i = 0; i < (MAXLINE - 1); ++i) {
+        s = line[i];
+        printf("%c", s);
+      }
+      printf("\n");
+    } else {
+      printf("The line input is the same as or shorter than the linearray:\n");
+      for (i = 0; i < len; ++i) {
+        s = line[i];
+        printf("%c", s);
+      }
     }
-  }
-
-  /* there was a line */
-  if (max > 0) {
-    printf("%s", longest);
   }
 
   return 0;
@@ -29,17 +38,28 @@ main() {
 
 /* get_line: read a line into s, return length */
 int get_line(char line[], int maxline) {
-  int c, i;
-  for (i = 0; i < maxline - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
-    line[i] = c;
+  int i;
+  char c;
+
+  for (i = 0; (c = getchar()) != EOF && c != '\n'; ++i) {
+    if (i < maxline - 1) {
+      line[i] = c;
+    }
   }
 
   if (c == '\n') {
-    line[i] = c;
-    ++i;
+    if (i < maxline - 1) {
+      line[i] = c;
+      ++i;
+    }
   }
 
-  line[i] = '\0';
+  if (i < maxline) {
+    line[i] = '\0';
+  } else {
+    line[maxline - 1] = '\0';
+  }
+
   return i;
 }
 
