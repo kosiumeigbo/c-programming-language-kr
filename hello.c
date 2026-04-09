@@ -19,13 +19,14 @@ main() {
     printf("Length of line input: %d\n", len);
     if (len >= MAXLINE) {
       printf("The line input is longer than the line array:\n");
+      printf("The line input is obviously also greater than 80 characters:\n");
       for (i = 0; i < (MAXLINE - 1); ++i) {
         s = line[i];
         printf("%c", s);
       }
       printf("\n");
-    } else {
-      printf("The line input is the same as or shorter than the linearray:\n");
+    } else if (len > 80) {
+      printf("The line input is the same as or shorter than the linearray and also greater than 80 characters:\n");
       for (i = 0; i < len; ++i) {
         s = line[i];
         printf("%c", s);
