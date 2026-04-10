@@ -5,35 +5,26 @@
 int get_line(char line[], int maxline);
 void copy(char to[], char from[]);
 int clean_line(int start_length, char start_line[], char end_line[]);
+int reverse(char input[], char output[]);
 
-/* print only non-empty lines */
+/* reverse all input lines */
 int main(void) {
-  int len;                  /* current line length */
-  int clean_line_length;    /* length of line after cleaning */
-  char line_input[MAXLINE]; /* current input line */
-  char line_clean[MAXLINE]; /* current cleaned line saved here */
+  int len;                          /* current line length */
+  int len_reversed;                 /* reversed line length */
+  char line_input[MAXLINE];         /* current input line */
+  char line_input_reverse[MAXLINE]; /* reversed input line */
 
   while ((len = get_line(line_input, MAXLINE)) > 0) {
     printf("Length of line input: %d\n", len);
-    clean_line_length = clean_line(len, line_input, line_clean);
-    printf("Length of clean line: %d\n", clean_line_length);
-    if (clean_line_length == 0) {
-      printf("This is not a valid line to print because the clean version is empty\n");
-    } else if (clean_line_length == 1 && line_clean[clean_line_length - 1] == '\n') {
-      printf("This is not a valid line to print because the clean version contains only 1 \\n\n");
-    } else if (clean_line_length == 1 && line_clean[clean_line_length - 1] != '\n') {
-      printf("This is a valid line to print because the cleaned version is not empty\n");
-      printf("%s\n", line_clean);
-    } else {
-      printf("This is a valid line to print because the cleaned version is not empty\n");
-      printf("%s\n", line_clean);
-    }
+    len_reversed = reverse(line_input, line_input_reverse);
+    printf("Line input reversed:%s\n", line_input_reverse);
+    printf("Length of Line input reversed: %d\n", len_reversed);
   }
 
   return 0;
 }
 
-/* get_line: read a line into s, return length (excluding null terminator) */
+/* get_line: read a line into 'line', return length (excluding null terminator) */
 int get_line(char line[], int maxline) {
   int i;
   char c;
@@ -109,5 +100,26 @@ int clean_line(int start_line_length, char start_line[], char end_line[]) {
       end_line[j] = '\0';
       return j;
     }
+  }
+}
+
+/* reverse: reverse the line input and return the length (excluding null terminator) */
+int reverse(char input[], char output[]) {
+  int i = 0;
+
+  while (input[i] != '\0') {
+    ++i;
+  }
+
+  if (i == 0) {
+    output[0] = '\0';
+    return 0;
+  } else {
+    output[i] = '\0';
+    int j;
+    for (j = 0; j < i; ++j) {
+      output[j] = input[(i - 1) - j];
+    }
+    return i;
   }
 }
