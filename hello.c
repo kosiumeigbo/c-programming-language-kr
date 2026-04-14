@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <stdio.h>
 
 long unsigned_max_value(char type, char qual);
