@@ -1,3 +1,4 @@
+#include <float.h>
 #include <limits.h>
 #include <stdio.h>
 
@@ -24,6 +25,10 @@ int main() {
   printf("for signed short: %d to %d\n", SHRT_MIN, SHRT_MAX);
   printf("for signed int: %d to %d\n", INT_MIN, INT_MAX);
   printf("for signed long: %ld to %ld\n", LONG_MIN, LONG_MAX);
+  printf("\n");
+  printf("Based on limits.h\n");
+  printf("for float: %f to %f\n", FLT_MIN, FLT_MAX);
+  printf("for double: %f to %f\n", DBL_MIN, DBL_MAX);
   return 0;
 }
 
